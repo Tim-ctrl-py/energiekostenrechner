@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energiekostenrechner - Aluca GmbH</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .logo-side {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo-large {
+      width: 400px;
+      height: auto;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+      transition: all 0.3s ease;
+
+    }
+
+    .logo-large:hover {
+      transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 12px 24px rgba(243, 156, 18, 0.5));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 45px 50px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+      max-width: 750px;
+      width: 100%;
+      animation: slideUp 0.6s ease-out;
+      border: 3px solid #f39c12;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #1a3a52;
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 2.2em;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .intro-text {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #1a3a52;
+      font-weight: 700;
+      font-size: 1.05em;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #1a3a52;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      background: #f8f9fa;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #f39c12;
+      box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.2);
+      transform: translateY(-2px);
+      background: white;
+    }
+
+    input:hover, select:hover {
+      border-color: #f39c12;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1a3a52 0%, #f39c12 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 12px;
+      box-shadow: 0 6px 20px rgba(26, 58, 82, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(243, 156, 18, 0.6);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    .result {
+      background: linear-gradient(135deg, #d6eaf8 0%, #aed6f1 100%);
+      border: 3px solid #f39c12;
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 30px;
+      animation: slideUp 0.6s ease-out;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .result h2 {
+      color: #1a3a52;
+      margin-bottom: 25px;
+      font-size: 1.7em;
+      font-weight: 800;
+    }
+
+    .result-item {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 1.2em;
+      margin: 14px 0;
+      color: #1a3a52;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      flex-wrap: nowrap;
+      gap: 15px;
+    }
+
+    .result-item span {
+      flex-shrink: 0;
+    }
+
+    .result-item strong {
+      font-size: 1.2em;
+      background: linear-gradient(135deg, #1a3a52 0%, #f39c12 100%);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1000px) {
+      .wrapper {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .logo-side {
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 20px;
+      }
+
+      .logo-large {
+        width: 350;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 25px;
+        border: 2px solid #f39c12;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      .result-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .result-item strong {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .logo-side {
+        display: none;
+      }
+    }
+  </style>
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="logo-side">
+      <img src="{{ url_for('static', filename='Aluca.png') }}" alt="Aluca Logo" class="logo-large">
+    </div>
+
+    <div class="container">
+      <h1>💡 Energiekostenrechner</h1>
+      <p class="intro-text">Berechnen Sie Ihre jährliche und gesamte Ersparnis für Verbrenner oder Elektro</p>
+
+      <form method="post">
+        <div class="form-group">
+          <label for="art">🚗 Fahrzeugtyp:</label>
+          <select name="art" id="art" required>
+            <option value="">-- Bitte wählen --</option>
+            <option value="verbrenner" {% if request.form.get('art') == 'verbrenner' %}selected{% endif %}>Verbrenner</option>
+            <option value="elektro" {% if request.form.get('art') == 'elektro' %}selected{% endif %}>Elektro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="kosten">💶 Kosten pro Einheit (Euro):</label>
+          <input type="number" step="0.01" name="kosten" id="kosten" value="{{ request.form.get('kosten', '') }}" placeholder="z.B. 1,50" required>
+        </div>
+
+        <div class="form-group">
+          <label for="mitarbeiter">👥 Anzahl Mitarbeiter:</label>
+          <input type="number" name="mitarbeiter" id="mitarbeiter" min="1" value="{{ request.form.get('mitarbeiter', '') }}" placeholder="z.B. 10" required>
+        </div>
+
+        <div class="form-group">
+          <label for="laufzeit">📅 Laufzeit in Jahren:</label>
+          <input type="number" name="laufzeit" id="laufzeit" min="1" value="{{ request.form.get('laufzeit', '') }}" placeholder="z.B. 5" required>
+        </div>
+
+        <button type="submit">✨ Berechnen</button>
+      </form>
+
+      {% if ergebnis %}
+        <div class="result">
+          <h2>✅ Ergebnis</h2>
+          <div class="result-item">
+            <span>💰 Jährliche Ersparnis:</span>
+            <strong>{{ ergebnis.jaehrlich }} €</strong>
+          </div>
+          <div class="result-item">
+            <span>🎯 Gesamtersparnis ({{ request.form.get('laufzeit') }} Jahre):</span>
+            <strong>{{ ergebnis.gesamt }} €</strong>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="logo-side">
+      <img src="{{ url_for('static', filename='Aluca.png') }}" alt="Aluca Logo" class="logo-large">
+    </div>
+  </div>
+</body>
+</html>
+  </div>
+</body>
+</html>
