@@ -46,6 +46,28 @@
 
     }
 
+    .info-box {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      border: 3px solid #f39c12;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .info-box h3 {
+      color: #1a3a52;
+      font-size: 1.4em;
+      margin-bottom: 12px;
+    }
+
+    .info-box p {
+      color: #666;
+      font-size: 1em;
+      line-height: 1.5;
+    }
+
     .logo-large:hover {
       transform: scale(1.1) rotate(5deg);
       filter: drop-shadow(0 12px 24px rgba(243, 156, 18, 0.5));
@@ -244,8 +266,16 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="logo-side">
-      <img src="{{ url_for('static', filename='Aluca.png') }}" alt="Aluca Logo" class="logo-large">
+    <div class="info-box">
+      <h3> Erklärung zum Energiekostenrechner!</h3>
+      <p>Der Energiekostenrechner ermöglicht es Ihnen, die jährliche und gesamte Ersparnis für Verbrenner- oder Elektrofahrzeuge zu berechnen. Geben Sie einfach den Fahrzeugtyp, die Kosten pro Einheit, die Anzahl der Mitarbeiter und die Laufzeit in Jahren ein, um Ihre Einsparungen zu ermitteln.</p>
+      <p>Die Berechnung beruht auf aktuellen Energiepreisen sowie individuellen Annahmen der Aluca GmbH.</p>
+      <p>Dabei haben wir folgende Annahmen getroffen:</p>
+      <ul>
+        <li>Die durchschnittliche Ersparnis pro Liter je Kalenderwoche beträgt 3€.</li>
+        <li>Die durchschnittliche Ersparnis pro kWh je Kalenderwoche beträgt 8€.</li>
+        <li>Der Anzahl der Kalenderwochen pro Jahr beträgt 42.</li>
+      </ul>
     </div>
 
     <div class="container">
